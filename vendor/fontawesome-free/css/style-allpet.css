@@ -1,0 +1,40 @@
+.width-b
+{
+    width: 104px;
+}
+
+.margin-l
+{
+    margin-left: 14rem!important;
+}
+.margin-low
+{
+    margin-left: 6.5rem!important;
+}
+.margin-t
+{
+    margin-top: 118px;
+}
+.margin-b
+{
+    margin-bottom: 540px!important;
+}
+.blue-color
+{
+    background-color: #4e73df!important;
+    border-color: #4e73df!important;
+}
+.light-blue
+{
+    background-color:transparent!important;
+    border-color: transparent!important;
+    
+}
+
+.custom-dialog {
+    position: fixed; /* Set the position to fixed */
+ /* Adjust the top position */
+    left: 5.6%; /* Adjust the left position */
+    
+  }
+  
