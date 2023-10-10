@@ -104,7 +104,7 @@ mysqli_query($conn, "COMMIT");
                 </a>
                 <div id="collapseFuncionarios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Opções:</h6>
+                        
                         <a class="collapse-item" href="./addfuncionario.html">Adicionar Funcionário</a>
                         <a class="collapse-item" href="./confuncionario.html">Consultar Funcionário</a>
                     </div>
@@ -119,7 +119,7 @@ mysqli_query($conn, "COMMIT");
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Opções:</h6>
+                        
                         <a class="collapse-item" href="./addservico.html">Adicionar Serviços</a>
                         <a class="collapse-item" href="./conservico.html">Consultar Serviços</a>
                     </div>
@@ -134,7 +134,7 @@ mysqli_query($conn, "COMMIT");
                 </a>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Opções:</h6>
+                        
                         <a class="collapse-item" href="./addtutor.html">Adicionar Tutor</a>
                         <a class="collapse-item" href="./contutor.html">Consultar Tutor</a>
                     </div>
@@ -149,7 +149,7 @@ mysqli_query($conn, "COMMIT");
                 </a>
                 <div id="collapsePet" class="collapse" aria-labelledby="headingPets" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Opções:</h6>
+                        
                         <a class="collapse-item" href="./addpet.html">Adicionar Pet</a>
                         <a class="collapse-item" href="./conpet.html">Consultar Pet</a>
 
