@@ -18,12 +18,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
     <title>AllPet | Agenda</title>
 
-    <!-- Custom fonts for this template-->
+
     <link href="../vendor/fontawesome-free/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../vendor/fontawesome-free/css/style-allpet.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="../agenda/main.min.js"></script>
@@ -96,13 +96,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
+
     <div id="wrapper">
 
-        <!-- Sidebar -->
+
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion fixed-top" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
+
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./index.php">
                 <div class="sidebar-brand-icon">
                     <img src="../icon-allpet.svg" alt="Dog">
@@ -110,23 +110,23 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <div class="sidebar-brand-text fs-6 mx-1">ALLPET</div>
             </a>
 
-            <!-- Divider -->
+
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
+
             <li class="nav-item active">
                 <a class="nav-link" href="./index.php">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Home</span></a>
             </li>
 
-            <!-- Divider -->
+
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
 
 
-            <!-- Nav Item - Pages Collapse Menu -->
+
+
             <li class="nav-item">
                 <div class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncionarios" aria-expanded="true" aria-controls="collapseFuncionarios">
                     <a class="text-reset text-decoration-none" href="./confuncionario.html">
@@ -136,14 +136,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 </div>
                 <div id="collapseFuncionarios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        
+
                         <a class="collapse-item" href="./addfuncionario.html">Adicionar Funcionário</a>
                         <a class="collapse-item" href="./confuncionario.html">Consultar Funcionário</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+
             <li class="nav-item">
                 <div class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     <a class="text-reset text-decoration-none" href="./conservico.html">
@@ -153,14 +153,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        
+
                         <a class="collapse-item" href="./addservico.html">Adicionar Serviços</a>
                         <a class="collapse-item" href="./conservico.html">Consultar Serviços</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+
             <li class="nav-item">
                 <div class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                     <a class="text-reset text-decoration-none" href="./contutor.html">
@@ -170,7 +170,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 </div>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        
+
                         <a class="collapse-item" href="./addtutor.html">Adicionar Tutor</a>
                         <a class="collapse-item" href="./contutor.html">Consultar Tutor</a>
                     </div>
@@ -181,14 +181,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <!-- Nav Item - Utilities Collapse Menu PET -->
             <li class="nav-item">
                 <div class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAgenda" aria-expanded="true" aria-controls="collapseAgenda">
-                    <a class="text-reset text-decoration-none" href="./conagenda.html">
+                    <a class="text-reset text-decoration-none" href="#">
                         <i class="fas fa-fw fa-calendar"></i>
                         <span>Pet</span>
                     </a>
                 </div>
                 <div id="collapseAgenda" class="collapse" aria-labelledby="headingPets" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        
+
                         <a class="collapse-item" href="./addpet.html">Adicionar Pet</a>
                         <a class="collapse-item" href="./conpet.html">Consultar Pet</a>
 
@@ -196,10 +196,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 </div>
             </li>
 
-            <!-- Divider -->
+
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
+
             <div class="sidebar-heading">
                 Outros
             </div>
@@ -224,10 +224,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 
 
-    <!-- Divider -->
+
     <hr class="sidebar-divider d-none d-md-block">
 
-    <!-- Sidebar Toggler (Sidebar) -->
+
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
@@ -235,23 +235,23 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 
     </ul>
-    <!-- End of Sidebar -->
 
-    <!-- Content Wrapper -->
+
+
     <div id="content-wrapper" class="d-flex flex-column">
 
-        <!-- Main Content -->
+
         <div id="content">
 
-            <!-- Topbar -->
+
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top margin-l">
 
-                <!-- Sidebar Toggle (Topbar) -->
+
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- Topbar Search -->
+
                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
@@ -263,15 +263,15 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     </div>
                 </form>
 
-                <!-- Topbar Navbar -->
+
                 <ul class="navbar-nav ml-auto">
 
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+
                     <li class="nav-item dropdown no-arrow d-sm-none">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-search fa-fw"></i>
                         </a>
-                        <!-- Dropdown - Messages -->
+
                         <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                             <form class="form-inline mr-auto w-100 navbar-search">
                                 <div class="input-group">
