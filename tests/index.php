@@ -753,7 +753,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <div class="modal-body">Selcione "Sair" abaixo se você estiver pronto para sair da sessão.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.php">Sair</a>
+                    <a class="btn btn-primary <?php session_reset(); ?>" href="login.php">Sair</a>
                 </div>
             </div>
         </div>

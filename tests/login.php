@@ -160,8 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   </form>
                   <hr />
                   <div class="text-center">
-                    <!-- <span> oi <?php echo $fetch[0]; ?></span> -->
-                    <a class="small" href="forgot-senha.html">Esqueceu a senha?</a>
+                    <a class="small" href="recuperar-senha.php">Esqueceu a senha?</a>
                   </div>
                 </div>
               </div>
