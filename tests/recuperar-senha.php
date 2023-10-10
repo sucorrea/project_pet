@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             </div>
                                             <div class="form-group">
                                                 <input type="submit" class="btn btn-primary" value="Redefinir">
-                                                <a class="btn btn-link ml-2" href="welcome.php">Cancelar</a>
+                                                <a class="btn btn-link ml-2" href="login.php">Cancelar</a>
                                             </div>
                                         </form>
                                     </div>
