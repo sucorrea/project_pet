@@ -3,41 +3,38 @@ include 'connect.php';
 
 $success = 0;
 // Fetch days of the week from the "daysweek" table
-$sql = "SELECT nomedodia, id FROM diasdasemana";
+$sql = "SELECT * FROM usuarios";
 $result = mysqli_query($conn, $sql);
 
 
-if(isset($_POST['submit']))
-{
+if (isset($_POST['submit'])) {
 
-// Dados de Pessoa
-
-
-$email = mysqli_real_escape_string($conn, $_POST['email']);
-$tipo = 1;
+    // Dados de Pessoa
 
 
-//$funcao = $_POST['funcao'];
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $tipo = 1;
 
-// Dados de Endereço
+
+    //$funcao = $_POST['funcao'];
+
+    // Dados de Endereço
 
 
-$endereco = "INSERT INTO endereco (cep, rua, num_da_casa, cidade, estado, bairro) VALUES ('$_POST[cep]', '$_POST[rua]', '$_POST[numero]', '$_POST[cidade]', '$_POST[estado]', '$_POST[bairro]')";
-$funcionario = "INSERT INTO funcionarios (cpf_pessoa, diadefolga, hora_de_trab, perfil ) VALUES ('$_POST[cpf]', '$_POST[folga]', '$_POST[hora_de_trab]', '$_POST[perfil]')";
+    $endereco = "INSERT INTO endereco (cep, rua, num_da_casa, cidade, estado, bairro) VALUES ('$_POST[cep]', '$_POST[rua]', '$_POST[numero]', '$_POST[cidade]', '$_POST[estado]', '$_POST[bairro]')";
+    $funcionario = "INSERT INTO funcionarios (cpf_pessoa, diadefolga, hora_de_trab, perfil ) VALUES ('$_POST[cpf]', '$_POST[folga]', '$_POST[hora_de_trab]', '$_POST[perfil]')";
 
-mysqli_query($conn, "START TRANSACTION");
+    mysqli_query($conn, "START TRANSACTION");
 
-  if(mysqli_query($conn, $endereco))
-{
-  $lastInsertedId = mysqli_insert_id($conn);
-  $pessoa = "INSERT INTO pessoas (nome, cpf, dtnasc, telefone, email, rg, tipo, fkendereco) VALUES ('$_POST[nome]', '$_POST[cpf]', '$_POST[dt_nasc]', '$_POST[telefone]', '$email', '$_POST[rg]', '$tipo', '$lastInsertedId')";
-    mysqli_query($conn, $pessoa);
-  
-    mysqli_query($conn, $funcionario);
-      
-    $success = 1;
-  }
-    else echo "Occorreu algum erro";
+    if (mysqli_query($conn, $endereco)) {
+        $lastInsertedId = mysqli_insert_id($conn);
+        $pessoa = "INSERT INTO pessoas (nome, cpf, dtnasc, telefone, email, rg, tipo, fkendereco) VALUES ('$_POST[nome]', '$_POST[cpf]', '$_POST[dt_nasc]', '$_POST[telefone]', '$email', '$_POST[rg]', '$tipo', '$lastInsertedId')";
+        mysqli_query($conn, $pessoa);
+
+        mysqli_query($conn, $funcionario);
+
+        $success = 1;
+    } else echo "Occorreu algum erro";
 }
 mysqli_query($conn, "COMMIT");
 
@@ -58,9 +55,7 @@ mysqli_query($conn, "COMMIT");
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
@@ -103,8 +98,7 @@ mysqli_query($conn, "COMMIT");
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncionarios"
-                    aria-expanded="true" aria-controls="collapseFuncionarios">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncionarios" aria-expanded="true" aria-controls="collapseFuncionarios">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Funcionário</span>
                 </a>
@@ -119,8 +113,7 @@ mysqli_query($conn, "COMMIT");
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                    aria-expanded="true" aria-controls="collapseThree">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-fw fa-file-alt"></i>
                     <span>Serviços</span>
                 </a>
@@ -135,8 +128,7 @@ mysqli_query($conn, "COMMIT");
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                    aria-expanded="true" aria-controls="collapseFour">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Tutor</span>
                 </a>
@@ -151,18 +143,16 @@ mysqli_query($conn, "COMMIT");
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePet"
-                    aria-expanded="true" aria-controls="collapsePet">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePet" aria-expanded="true" aria-controls="collapsePet">
                     <i class="fas fa-fw fa-paw"></i>
                     <span>Pet</span>
                 </a>
-                <div id="collapsePet" class="collapse" aria-labelledby="headingPets"
-                    data-parent="#accordionSidebar">
+                <div id="collapsePet" class="collapse" aria-labelledby="headingPets" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opções:</h6>
                         <a class="collapse-item" href="./addpet.html">Adicionar Pet</a>
                         <a class="collapse-item" href="./conpet.html">Consultar Pet</a>
-                        
+
                     </div>
                 </div>
             </li>
@@ -177,8 +167,7 @@ mysqli_query($conn, "COMMIT");
 
             <!-- Nav Item - Configurações -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
-                    aria-expanded="true" aria-controls="collapseSettings">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Configurações</span>
                 </a>
@@ -191,7 +180,7 @@ mysqli_query($conn, "COMMIT");
                 </div>
             </li>
 
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -200,7 +189,7 @@ mysqli_query($conn, "COMMIT");
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-        
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -220,11 +209,9 @@ mysqli_query($conn, "COMMIT");
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -238,18 +225,14 @@ mysqli_query($conn, "COMMIT");
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -381,15 +364,12 @@ mysqli_query($conn, "COMMIT");
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="../img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -419,198 +399,197 @@ mysqli_query($conn, "COMMIT");
 
                 <!-- ADD Funcionario -->
                 <div class="card shadow container w-75 mb-5">
-                    
+
                     <form>
-                <!-- Container Pessoa-->
-                  <div class="container mt-5">
-                    <div class="row">
-                      <div class="col mb-3">
-                        <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col mb-3">
-                        <label for="cpf" class="form-label">CPF</label>
-                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o cpf">
-                      </div>
-                      <div class="col mb-3">
-                        <label for="rg" class="form-label">RG</label>
-                            <input type="text" class="form-control" id="rg" name="rg" placeholder="Digite o RG">
-                      </div>
-                      <div class="col mb-3">
-                        <label for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col mb-3">
-                        <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email">
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Container Função -->
-                  <div class="container mt-5">
-                    <h5 class="text-left mb-3">Funcão</h5>
-                    <div class="row">
-                      <div class="col mb-3">
-                        <label for="funcao" class="form-label">Função</label>
-                            <input type="text" class="form-control" id="funcao" name="funcao" placeholder="Digite a função">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col mb-3">
-                        <label for="perfil" class="form-label">Perfil</label>
-                            <input type="text" class="form-control" id="perfil" name="perfil" placeholder="Digite o perfil">
-                      </div>
-                      <div class="col mb-3">
-                        <label for="hora_de_trab" class="form-label">Horário de Trabalho</label>
-                            <input type="number" class="form-control" id="hora_de_trab" name="hora_de_trab" placeholder="Digite o horário">
-                      </div>
-                      <div class="col mb-3">
-                        <label for="diadefolga" class="form-label">Dia de Folga</label>
-                        <?php
+                        <!-- Container Pessoa-->
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nome" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="cpf" class="form-label">CPF</label>
+                                    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o cpf">
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="rg" class="form-label">RG</label>
+                                    <input type="text" class="form-control" id="rg" name="rg" placeholder="Digite o RG">
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="telefone" class="form-label">Telefone</label>
+                                    <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Container Função -->
+                        <div class="container mt-5">
+                            <h5 class="text-left mb-3">Funcão</h5>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="funcao" class="form-label">Função</label>
+                                    <input type="text" class="form-control" id="funcao" name="funcao" placeholder="Digite a função">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="perfil" class="form-label">Perfil</label>
+                                    <input type="text" class="form-control" id="perfil" name="perfil" placeholder="Digite o perfil">
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="hora_de_trab" class="form-label">Horário de Trabalho</label>
+                                    <input type="number" class="form-control" id="hora_de_trab" name="hora_de_trab" placeholder="Digite o horário">
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="diadefolga" class="form-label">Dia de Folga</label>
+                                    <?php
 
-                        echo '<select class="form-control" name="folga">';
-                        while ($row = mysqli_fetch_assoc($result)) {
-                        $dayName = $row['nomedodia'];
-                        $id = $row['id'];
-                        echo '<option value="' . $id . '">' . $dayName . '</option>';
-                        }
-                        echo '</select><br>';
-                        ?>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome">
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Container Endereço-->
-                  <div class="container mt-5">
-                    <h5 class="text-left mb-3">Endereço</h5>
-                    <div class="row">
-                      <div class="col mb-3">
-                        <label for="rua" class="form-label">Endereço</label>
-                            <input type="text" class="form-control" id="rua" name="rua" placeholder="Digite o endereço">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col mb-3">
-                        <label for="bairro" class="form-label">Bairro</label>
-                            <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro">
-                      </div>
-                      <div class="col mb-3">
-                        <label for="cidade" class="form-label">Cidade</label>
-                            <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite a cidade">
-                      </div>
-                      <div class="col mb-3">
-                        <label for="estado" class="form-label">Estado</label>
-                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Digite estado">
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                          <label for="cep" class="form-label">CEP</label>
-                              <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite o CEP">
+                                    echo '<select class="form-control" name="folga">';
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $dayName = $row['nomedodia'];
+                                        $id = $row['id'];
+                                        echo '<option value="' . $id . '">' . $dayName . '</option>';
+                                    }
+                                    echo '</select><br>';
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Nome</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col mb-3">
-                          <label for="numero" class="form-label">Numero</label>
-                              <input type="text" class="form-control" id="numero" name="numero" placeholder="Digite o numero">
+                        <!-- Container Endereço-->
+                        <div class="container mt-5">
+                            <h5 class="text-left mb-3">Endereço</h5>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="rua" class="form-label">Endereço</label>
+                                    <input type="text" class="form-control" id="rua" name="rua" placeholder="Digite o endereço">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="bairro" class="form-label">Bairro</label>
+                                    <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro">
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="cidade" class="form-label">Cidade</label>
+                                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite a cidade">
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Digite estado">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="cep" class="form-label">CEP</label>
+                                    <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite o CEP">
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="numero" class="form-label">Numero</label>
+                                    <input type="text" class="form-control" id="numero" name="numero" placeholder="Digite o numero">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label for="complemento" class="form-label">Complemento</label>
+                                    <input type="text" class="form-control" id="complemento" placeholder="Digite o complemento">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="pontoreferencia" class="form-label">Ponto de Referência</label>
+                                    <input type="text" class="form-control" id="pontoreferencia" placeholder="Digite o ponto de referência">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-6 mb-3">
-                          <label for="complemento" class="form-label">Complemento</label>
-                              <input type="text" class="form-control" id="complemento" placeholder="Digite o complemento">
+                        <!-- Container Button-->
+                        <div class="container mt-5 mb-5">
+                            <div class="gap-2 d-md-block">
+                                <button type="submit" name="submit" class="btn btn-success width-b">Salvar</button>
+                                <button type="button" class="btn btn-secondary width-b">Cancelar</button>
+                                <?php
+                                if ($success == 1)
+                                    echo ("Cadastro feito com sucesso");
+                                ?>
+                            </div>
+
                         </div>
-                      </div>
-                    <div class="row">
-                      <div class="col mb-3">
-                        <label for="pontoreferencia" class="form-label">Ponto de Referência</label>
-                            <input type="text" class="form-control" id="pontoreferencia" placeholder="Digite o ponto de referência">
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Container Button-->
-                  <div class="container mt-5 mb-5">
-                    <div class="gap-2 d-md-block">
-                            <button type="submit" name="submit" class="btn btn-success width-b">Salvar</button>
-                            <button type="button" class="btn btn-secondary width-b">Cancelar</button>
-                            <?php
-                        if($success == 1)
-                            echo ("Cadastro feito com sucesso");
-                        ?>
-                      </div>
-                
+                        <!-- End Funcionario -->
+
+                        <!-- /.container-fluid -->
+
+                        <!-- End Body Content-->
+
                 </div>
-                <!-- End Funcionario -->
-                
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
 
-                <!-- End Body Content-->
-                
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2021</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../login.html">Logout</a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="../login.html">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="../vendor/jquery/jquery.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="../js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="../vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="../js/demo/chart-area-demo.js"></script>
+        <script src="../js/demo/chart-pie-demo.js"></script>
 
 </body>
 
