@@ -93,7 +93,7 @@ mysqli_query($conn, "COMMIT");
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
