@@ -36,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Prepare uma declaração selecionada
     $sql = "SELECT id_usuario, senha, cpf FROM usuarios WHERE  cpf = :usuario";
 
-    echo $sql;
 
     if ($stmt = $pdo->prepare($sql)) {
       // Vincule as variáveis à instrução preparada como parâmetros

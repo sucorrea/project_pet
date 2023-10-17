@@ -129,7 +129,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
             <li class="nav-item">
                 <div class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncionarios" aria-expanded="true" aria-controls="collapseFuncionarios">
-                    <a class="text-reset text-decoration-none" href="./confuncionario.html">
+                    <a class="text-reset text-decoration-none" href="./confuncionario.php">
                         <i class="fas fa-fw fa-user"></i>
                         <span>Funcionário</span>
                     </a>
@@ -138,7 +138,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     <div class="bg-white py-2 collapse-inner rounded">
 
                         <a class="collapse-item" href="./addfuncionario.html">Adicionar Funcionário</a>
-                        <a class="collapse-item" href="./confuncionario.html">Consultar Funcionário</a>
+                        <a class="collapse-item" href="./confuncionario.php">Consultar Funcionário</a>
                     </div>
                 </div>
             </li>
@@ -204,7 +204,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <div class="sidebar-heading">
                     Outros
                 </div>
-
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">
                         <i class="fa fa-print" aria-hidden="true"></i>

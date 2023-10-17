@@ -105,7 +105,7 @@ mysqli_query($conn, "COMMIT");
                     <div class="bg-white py-2 collapse-inner rounded">
                         
                         <a class="collapse-item" href="./addfuncionario.html">Adicionar Funcionário</a>
-                        <a class="collapse-item" href="./confuncionario.html">Consultar Funcionário</a>
+                        <a class="collapse-item" href="./confuncionario.php">Consultar Funcionário</a>
                     </div>
                 </div>
             </li>
