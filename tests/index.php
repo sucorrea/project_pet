@@ -200,25 +200,26 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <hr class="sidebar-divider">
 
 
-            <div class="sidebar-heading">
-                Outros
-            </div>
+            <div class=" <?php echo (($_SESSION["id_funcao"] == 1)) ? '' : 'd-none'; ?>">
+                <div class="sidebar-heading">
+                    Outros
+                </div>
 
-            <!-- Nav Item - Relatórios -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">
-                    <i class="fa fa-print" aria-hidden="true"></i>
-                    <span>Relatórios</span>
-                </a>
-                <div id="collapseSettings" class="collapse" aria-labelledby="headingSettings" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Opções</h6>
-                        <a class="collapse-item" href="alterar">Relatório Financeiro</a>
-                        <a class="collapse-item" href="alterar">Relatório Funcionário</a>
-                        <a class="collapse-item" href="alterar">Relatório Pet</a>
-                        <a class="collapse-item" href="alterar">Relatório Serviço</a>
-                        <a class="collapse-item" href="alterar">Relatório Tutor</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">
+                        <i class="fa fa-print" aria-hidden="true"></i>
+                        <span>Relatórios</span>
+                    </a>
+                    <div id="collapseSettings" class="collapse" aria-labelledby="headingSettings" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Opções</h6>
+                            <a class="collapse-item" href="alterar">Relatório Financeiro</a>
+                            <a class="collapse-item" href="alterar">Relatório Funcionário</a>
+                            <a class="collapse-item" href="alterar">Relatório Pet</a>
+                            <a class="collapse-item" href="alterar">Relatório Serviço</a>
+                            <a class="collapse-item" href="alterar">Relatório Tutor</a>
+                </li>
+            </div>
     </div>
     </li>
 

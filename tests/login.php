@@ -34,8 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Validar credenciais
   if (empty($usuario_err) && empty($senha_err)) {
     // Prepare uma declaração selecionada
-    $sql = "SELECT id_usuario, usuario, senha, cpf FROM usuarios WHERE  usuario = :usuario";
+    $sql = "SELECT id_usuario, senha, cpf FROM usuarios WHERE  cpf = :usuario";
 
+    echo $sql;
 
     if ($stmt = $pdo->prepare($sql)) {
       // Vincule as variáveis à instrução preparada como parâmetros
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->rowCount() == 1) {
           if ($row = $stmt->fetch()) {
             $id = $row["id_usuario"];
-            $usuario = $row["usuario"];
+           
             $hashed_senha = $row["senha"];
             $cpf = $row["cpf"];
 
@@ -81,7 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               // Armazene dados em variáveis de sessão
               $_SESSION["loggedin"] = true;
               $_SESSION["id_usuario"] = $id;
-              $_SESSION["usuario"] = $usuario;
               $_SESSION["nome"] = $fetchs[0];
               $_SESSION["funcao"] = $retorno_funcao[0];
               $_SESSION["departamento"] = $retorno_funcao[1];
