@@ -1,115 +1,84 @@
 <?php
 session_start();
-
-//Verifique se o usuário já está logado, em caso afirmativo, redirecione-o para a página de boas-vindas
-// if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-//   header("location: index.php");
-
-//   exit;
-// }
-//Incluir arquivo de configuração
 require_once "config.php";
 
-// Defina variáveis e inicialize com valores vazios
 $usuario = $senha = "";
 $usuario_err = $senha_err = $login_err = "";
 
-// Processando dados do formulário quando o formulário é enviado
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-  // Verifique se o nome de usuário está vazio
   if (empty(trim($_POST["usuario"]))) {
     $usuario_err = "Por favor, insira o nome de usuário.";
   } else {
     $usuario = trim($_POST["usuario"]);
   }
 
-  // Verifique se a senha está vazia
   if (empty(trim($_POST["senha"]))) {
     $senha_err = "Por favor, insira sua senha.";
   } else {
     $senha = trim($_POST["senha"]);
   }
 
-  // Validar credenciais
-  if (empty($usuario_err) && empty($senha_err)) {
-    // Prepare uma declaração selecionada
-    $sql = "SELECT id_usuario, senha, cpf FROM usuarios WHERE  cpf = :usuario";
 
+  // if (empty($usuario_err) && empty($senha_err)) {
+  $sql = "SELECT id_usuario, senha_usuario, cpf FROM usuarios WHERE  cpf = :usuario";
+  if ($stmt = $conection->prepare($sql)) {
+    $stmt->bindParam(":usuario", $param_usuario, PDO::PARAM_STR);
+    $param_usuario = trim($_POST["usuario"]);
 
-    if ($stmt = $pdo->prepare($sql)) {
-      // Vincule as variáveis à instrução preparada como parâmetros
-      $stmt->bindParam(":usuario", $param_usuario, PDO::PARAM_STR);
+    if ($stmt->execute()) {
+      if ($stmt->rowCount() == 1) {
+        if ($row = $stmt->fetch()) {
+          $id = $row["id_usuario"];
+          $hashed_senha = $row["senha_usuario"];
+          $cpf = $row["cpf"];
+          //tabela pessoas  
+          $query = "SELECT nome, email FROM pessoas WHERE cpf = '$cpf' LIMIT 1";
+          $stmtNew = $conection->prepare($query);
+          $stmtNew->execute();
+          $row_pessoas = $stmtNew->fetch();
+          $nome_pessoa = $row_pessoas["nome"];
+          $email_pessoa = $row_pessoas["email"];
 
-      // Definir parâmetros
-      $param_usuario = trim($_POST["usuario"]);
-
-      // Tente executar a declaração preparada
-      if ($stmt->execute()) {
-        // Verifique se o nome de usuário existe, se sim, verifique a senha
-        if ($stmt->rowCount() == 1) {
-          if ($row = $stmt->fetch()) {
-            $id = $row["id_usuario"];
-           
-            $hashed_senha = $row["senha"];
-            $cpf = $row["cpf"];
-
-            
-
-            $query = "SELECT nome, email FROM pessoas WHERE cpf = '$cpf'";
-            $result = mysqli_query($conn, $query);
-            $fetchs = mysqli_fetch_row($result);
-
-            $consulta_funcao = "SELECT nome_funcao, departamento, funcionarios.fkfuncao
+          //tabela funcionarios
+          $consulta_funcao = "SELECT nome_funcao, departamento, funcionarios.fkfuncao as id_funcao
             FROM funcionarios
             INNER JOIN funcao ON  funcao.id = funcionarios.fkfuncao
-            WHERE funcionarios.cpf_pessoa = '$cpf'";
-            
-            $result2 = mysqli_query($conn, $consulta_funcao);
-            $retorno_funcao = mysqli_fetch_row($result2);
-            echo ($retorno_funcao[0]);
-            echo ($retorno_funcao[1]);
-
-            if ($senha == $hashed_senha) {
-              // A senha está correta, então inicie uma nova sessão
-
-              session_start();
+            WHERE funcionarios.cpf_pessoa = '$cpf' LIMIT 1";
+          $stmtJoin = $conection->prepare($consulta_funcao);
+          $stmtJoin->execute();
+          $row_funcionarios = $stmtJoin->fetch();
+          $funcao_pessoa = $row_funcionarios["nome_funcao"];
+          $departamento_pessoa = $row_funcionarios["departamento"];
+          $id_funcao_pessoa = $row_funcionarios["id_funcao"];
 
 
-
-
-              // Armazene dados em variáveis de sessão
-              $_SESSION["loggedin"] = true;
-              $_SESSION["id_usuario"] = $id;
-              $_SESSION["nome"] = $fetchs[0];
-              $_SESSION["funcao"] = $retorno_funcao[0];
-              $_SESSION["departamento"] = $retorno_funcao[1];
-              $_SESSION["id_funcao"] = $retorno_funcao[2];
-
-
-
-              // Redirecionar o usuário para a página de boas-vindas
-              header("location: index.php");
-            } else {
-              // A senha não é válida, exibe uma mensagem de erro genérica
-              $login_err = "Nome de usuário ou senha inválidos.";
-            }
+          if ($senha == $hashed_senha) {
+            session_start();
+            $_SESSION["loggedin"] = true;
+            $_SESSION["id_usuario"] = $id;
+            $_SESSION["nome"] = $nome_pessoa;
+            $_SESSION["email"] = $email_pessoa;
+            $_SESSION["funcao"] = $funcao_pessoa;
+            $_SESSION["departamento"] = $departamento_pessoa;
+            $_SESSION["id_funcao"] = $id_funcao_pessoa;
+            header("location: index.php");
+          } else {
+            $login_err = "Nome de usuário ou senha inválidos.";
           }
-        } else {
-          // O nome de usuário não existe, exibe uma mensagem de erro genérica
-          $login_err = "Nome de usuário ou senha inválidos.";
         }
       } else {
-        echo "Ops! Algo deu errado. Por favor, tente novamente mais tarde.";
+        $login_err = "Nome de usuário ou senha inválidos.";
       }
-
-      // Fechar declaração
-      unset($stmt);
+    } else {
+      echo "Ops! Algo deu errado. Por favor, tente novamente mais tarde.";
     }
+    unset($stmt);
   }
-  unset($pdo);
+  // }
+  unset($conection);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -121,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <title>All Pet - Login</title>
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
   <link href="../css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
@@ -152,14 +121,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group">
                       <input type="senha" name="senha" class="form-control form-control-user <?php echo (!empty($senha_err)) ? 'is-invalid' : ''; ?>"" id=" exampleInputsenha" placeholder="senha" />
                       <span class="invalid-feedback"><?php echo $senha_err; ?></span>
-
                     </div>
-
                     <input type="submit" class="btn btn-primary btn-user btn-block" value="Entrar">
                   </form>
                   <hr />
                   <div class="text-center">
-                    <a class="small" href="recuperar-senha.php">Esqueceu a senha?</a>
+                    <a class="small" href="recuperar.php">Esqueceu a senha?</a>
                   </div>
                 </div>
               </div>
@@ -169,10 +136,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
   </div>
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="/..vendor/jquery-easing/jquery.easing.min.js"></script> -->
+  <script src="../js/sb-admin-2.min.js"></script>
 </body>
 
 </html>

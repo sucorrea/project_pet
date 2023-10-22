@@ -539,8 +539,9 @@ COMMIT;
 CREATE TABLE `usuarios` (
 	`id_usuario` INT(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
 	`usuario` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-	`senha` VARCHAR(40) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+	`senha_usuario` VARCHAR(40) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
 	`cpf` VARCHAR(12) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+  `recuperar_senha` varchar(220) DEFAULT NULL COLLATE 'utf8mb4_general_ci',
 	PRIMARY KEY (`id_usuario`) USING BTREE,
 	INDEX `fk_cpf` (`cpf`) USING BTREE
 )
