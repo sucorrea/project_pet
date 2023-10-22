@@ -1,6 +1,6 @@
 <?php
-session_start();
-ob_start();
+//session_start();
+//ob_start();
 require_once "config.php";
 date_default_timezone_set('Etc/UTC');
 
@@ -15,6 +15,7 @@ require '../lib/vendor/phpmailer/phpmailer/src/SMTP.php';
 require '../lib/vendor/autoload.php';
 
 $mail = new PHPMailer();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -48,12 +49,12 @@ $mail = new PHPMailer();
                                             //             WHERE usuario =:email  
                                             //             LIMIT 1";
                                             $query_usuario = "SELECT usuarios.id_usuario as id_usuario,  
-                                    email, 
-                                    pessoas.nome as nome  
-                            FROM pessoas 
-                            INNER JOIN usuarios  
-                            ON usuarios.cpf = pessoas.cpf
-                            WHERE email = :email LIMIT 1";
+                                                                    email, 
+                                                                    pessoas.nome as nome  
+                                                            FROM pessoas 
+                                                            INNER JOIN usuarios  
+                                                            ON usuarios.cpf = pessoas.cpf
+                                                            WHERE email = :email LIMIT 1";
                                             $result_usuario = $conection->prepare($query_usuario);
                                             $result_usuario->bindParam(':email', $dados['email'], PDO::PARAM_STR);
                                             $result_usuario->execute();
@@ -63,15 +64,15 @@ $mail = new PHPMailer();
                                                 $chave_recuperar_senha = password_hash($row_usuario['id_usuario'], PASSWORD_DEFAULT);
 
                                                 $query_up_usuario = "UPDATE usuarios 
-                        SET recuperar_senha =:recuperar_senha 
-                        WHERE id_usuario =:id_usuario 
-                        LIMIT 1";
+                                                                        SET recuperar_senha =:recuperar_senha 
+                                                                        WHERE id_usuario =:id_usuario 
+                                                                        LIMIT 1";
                                                 $result_up_usuario = $conection->prepare($query_up_usuario);
                                                 $result_up_usuario->bindParam(':recuperar_senha', $chave_recuperar_senha, PDO::PARAM_STR);
                                                 $result_up_usuario->bindParam(':id_usuario', $row_usuario['id_usuario'], PDO::PARAM_INT);
 
                                                 if ($result_up_usuario->execute()) {
-                                                    $link = "http://localhost/loginemail/atualizar_senha.php?chave=$chave_recuperar_senha";
+                                                    $link = "http://localhost/project_pet/tests/atualizar.php?chave=$chave_recuperar_senha";
 
 
                                                     try {

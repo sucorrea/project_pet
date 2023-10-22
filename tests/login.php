@@ -21,62 +21,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
 
-  // if (empty($usuario_err) && empty($senha_err)) {
-  $sql = "SELECT id_usuario, senha_usuario, cpf FROM usuarios WHERE  cpf = :usuario";
-  if ($stmt = $conection->prepare($sql)) {
-    $stmt->bindParam(":usuario", $param_usuario, PDO::PARAM_STR);
-    $param_usuario = trim($_POST["usuario"]);
+  if (empty($usuario_err) && empty($senha_err)) {
+    $sql = "SELECT id_usuario, senha_usuario, cpf FROM usuarios WHERE  cpf = :usuario";
+    if ($stmt = $conection->prepare($sql)) {
+      $stmt->bindParam(":usuario", $param_usuario, PDO::PARAM_STR);
+      $param_usuario = trim($_POST["usuario"]);
 
-    if ($stmt->execute()) {
-      if ($stmt->rowCount() == 1) {
-        if ($row = $stmt->fetch()) {
-          $id = $row["id_usuario"];
-          $hashed_senha = $row["senha_usuario"];
-          $cpf = $row["cpf"];
-          //tabela pessoas  
-          $query = "SELECT nome, email FROM pessoas WHERE cpf = '$cpf' LIMIT 1";
-          $stmtNew = $conection->prepare($query);
-          $stmtNew->execute();
-          $row_pessoas = $stmtNew->fetch();
-          $nome_pessoa = $row_pessoas["nome"];
-          $email_pessoa = $row_pessoas["email"];
+      if ($stmt->execute()) {
+        if ($stmt->rowCount() == 1) {
+          if ($row = $stmt->fetch()) {
+            $id = $row["id_usuario"];
+            $hashed_senha = $row["senha_usuario"];
+            $cpf = $row["cpf"];
+            //tabela pessoas  
+            $query = "SELECT nome, email FROM pessoas WHERE cpf = '$cpf' LIMIT 1";
+            $stmtNew = $conection->prepare($query);
+            $stmtNew->execute();
+            $row_pessoas = $stmtNew->fetch();
+            $nome_pessoa = $row_pessoas["nome"];
+            $email_pessoa = $row_pessoas["email"];
 
-          //tabela funcionarios
-          $consulta_funcao = "SELECT nome_funcao, departamento, funcionarios.fkfuncao as id_funcao
+            //tabela funcionarios
+            $consulta_funcao = "SELECT nome_funcao, departamento, funcionarios.fkfuncao as id_funcao
             FROM funcionarios
             INNER JOIN funcao ON  funcao.id = funcionarios.fkfuncao
             WHERE funcionarios.cpf_pessoa = '$cpf' LIMIT 1";
-          $stmtJoin = $conection->prepare($consulta_funcao);
-          $stmtJoin->execute();
-          $row_funcionarios = $stmtJoin->fetch();
-          $funcao_pessoa = $row_funcionarios["nome_funcao"];
-          $departamento_pessoa = $row_funcionarios["departamento"];
-          $id_funcao_pessoa = $row_funcionarios["id_funcao"];
+            $stmtJoin = $conection->prepare($consulta_funcao);
+            $stmtJoin->execute();
+            $row_funcionarios = $stmtJoin->fetch();
+            $funcao_pessoa = $row_funcionarios["nome_funcao"];
+            $departamento_pessoa = $row_funcionarios["departamento"];
+            $id_funcao_pessoa = $row_funcionarios["id_funcao"];
 
 
-          if ($senha == $hashed_senha) {
-            session_start();
-            $_SESSION["loggedin"] = true;
-            $_SESSION["id_usuario"] = $id;
-            $_SESSION["nome"] = $nome_pessoa;
-            $_SESSION["email"] = $email_pessoa;
-            $_SESSION["funcao"] = $funcao_pessoa;
-            $_SESSION["departamento"] = $departamento_pessoa;
-            $_SESSION["id_funcao"] = $id_funcao_pessoa;
-            header("location: index.php");
-          } else {
-            $login_err = "Nome de usuário ou senha inválidos.";
+            if ($senha == $hashed_senha) {
+              session_start();
+              $_SESSION["loggedin"] = true;
+              $_SESSION["id_usuario"] = $id;
+              $_SESSION["nome"] = $nome_pessoa;
+              $_SESSION["email"] = $email_pessoa;
+              $_SESSION["funcao"] = $funcao_pessoa;
+              $_SESSION["departamento"] = $departamento_pessoa;
+              $_SESSION["id_funcao"] = $id_funcao_pessoa;
+              header("location: index.php");
+            } else {
+              $login_err = "Nome de usuário ou senha inválidos.";
+            }
           }
+        } else {
+          $login_err = "Nome de usuário ou senha inválidos.";
         }
       } else {
-        $login_err = "Nome de usuário ou senha inválidos.";
+        echo "Ops! Algo deu errado. Por favor, tente novamente mais tarde.";
       }
-    } else {
-      echo "Ops! Algo deu errado. Por favor, tente novamente mais tarde.";
+      unset($stmt);
     }
-    unset($stmt);
   }
-  // }
   unset($conection);
 }
 ?>
