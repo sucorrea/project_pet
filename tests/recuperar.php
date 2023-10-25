@@ -41,13 +41,13 @@ $mail = new PHPMailer();
                                     <div class="text-center">
                                         <h2>Recuperar Senha</h2>
                                         <?php
+                                        $erro = "";
                                         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+                                        if (empty($dados['SendRecupSenha'])) {
+                                            $erro = 'digite o email para recuperar a senha';
+                                        }
                                         if (!empty($dados['SendRecupSenha'])) {
-                                            var_dump($dados);
-                                            // $query_usuario = "SELECT id_usuario, usuario,
-                                            //             FROM pessoas 
-                                            //             WHERE usuario =:email  
-                                            //             LIMIT 1";
+                                            //var_dump($dados);
                                             $query_usuario = "SELECT usuarios.id_usuario as id_usuario,  
                                                                     email, 
                                                                     pessoas.nome as nome  
@@ -102,8 +102,8 @@ $mail = new PHPMailer();
                     Sua senha permanecerá a mesma até que você ative este código.\n\n";
 
                                                         $mail->send();
-                                                        $_SESSION['msg'] = "<p style='color: green'>Enviado e-mail com instruções para recuperar a senha. Acesse a sua caixa de e-mail para recuperar a senha!</p>";
-                                                        header("Location: index.php");
+                                                        // $_SESSION['msg'] = "<p style='color: green'>Enviado e-mail com instruções para recuperar a senha. Acesse a sua caixa de e-mail para recuperar a senha!</p>";
+                                                        header("Location: enviado.php");
                                                     } catch (Exception $e) {
                                                         echo "Erro: E-mail não enviado. Mailer Error:
                     {$mail->ErrorInfo}";
@@ -127,8 +127,8 @@ $mail = new PHPMailer();
                                             } ?>
 
                                             <label>E-mail</label>
-                                            <input type="text" name="email" placeholder="Digite o usuário" value="<?php echo $email; ?>"><br><br>
-
+                                            <input type="text" name="email" placeholder="Digite seu e-mail" value="<?php echo $email; ?>"><br><br>
+                                            <span class="<?php echo (!empty($senha_err)) ? 'is-invalid' : 'd-none'; ?>"><?php echo htmlspecialchars($erro); ?></span>
                                             <input type="submit" value="Recuperar" name="SendRecupSenha">
                                         </form>
 

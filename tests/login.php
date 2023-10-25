@@ -5,7 +5,6 @@ require_once "config.php";
 $usuario = $senha = "";
 $usuario_err = $senha_err = $login_err = "";
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (empty(trim($_POST["usuario"]))) {
@@ -14,18 +13,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = trim($_POST["usuario"]);
   }
 
-  if (empty(trim($_POST["senha"]))) {
+  if (empty(trim($_POST["senha_usuario"]))) {
     $senha_err = "Por favor, insira sua senha.";
   } else {
-    $senha = trim($_POST["senha"]);
+    $senha = trim($_POST["senha_usuario"]);
   }
 
 
   if (empty($usuario_err) && empty($senha_err)) {
     $sql = "SELECT id_usuario, senha_usuario, cpf FROM usuarios WHERE  cpf = :usuario";
     if ($stmt = $conection->prepare($sql)) {
-      $stmt->bindParam(":usuario", $param_usuario, PDO::PARAM_STR);
       $param_usuario = trim($_POST["usuario"]);
+      $stmt->bindParam(":usuario", $param_usuario, PDO::PARAM_STR);
 
       if ($stmt->execute()) {
         if ($stmt->rowCount() == 1) {
@@ -54,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id_funcao_pessoa = $row_funcionarios["id_funcao"];
 
 
-            if ($senha == $hashed_senha) {
+            if (password_verify($senha, $hashed_senha)) {
               session_start();
               $_SESSION["loggedin"] = true;
               $_SESSION["id_usuario"] = $id;
@@ -119,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       <span class="invalid-feedback"><?php echo $usuario_err; ?></span>
                     </div>
                     <div class="form-group">
-                      <input type="senha" name="senha" class="form-control form-control-user <?php echo (!empty($senha_err)) ? 'is-invalid' : ''; ?>"" id=" exampleInputsenha" placeholder="senha" />
+                      <input type="senha_usuario" name="senha_usuario" class="form-control form-control-user <?php echo (!empty($senha_err)) ? 'is-invalid' : ''; ?>" id=" exampleInputsenha" placeholder="Senha" />
                       <span class="invalid-feedback"><?php echo $senha_err; ?></span>
                     </div>
                     <input type="submit" class="btn btn-primary btn-user btn-block" value="Entrar">

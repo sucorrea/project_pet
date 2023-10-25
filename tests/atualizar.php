@@ -53,16 +53,16 @@ require_once "config.php";
                                                     $query_up_usuario = "UPDATE usuarios 
                         SET senha_usuario =:senha_usuario,
                         recuperar_senha =:recuperar_senha
-                        WHERE id =:id 
+                        WHERE id_usuario =:id_usuario 
                         LIMIT 1";
                                                     $result_up_usuario = $conection->prepare($query_up_usuario);
                                                     $result_up_usuario->bindParam(':senha_usuario', $senha_usuario, PDO::PARAM_STR);
                                                     $result_up_usuario->bindParam(':recuperar_senha', $recuperar_senha);
-                                                    $result_up_usuario->bindParam(':id', $row_usuario['id_usuario'], PDO::PARAM_INT);
+                                                    $result_up_usuario->bindParam(':id_usuario', $row_usuario['id_usuario'], PDO::PARAM_INT);
 
                                                     if ($result_up_usuario->execute()) {
                                                         $_SESSION['msg'] = "<p style='color: green'>Senha atualizada com sucesso!</p>";
-                                                        header("Location: index.php");
+                                                        header("Location: login.php");
                                                     } else {
                                                         echo "<p style='color: #ff0000'>Erro: Tente novamente!</p>";
                                                     }
